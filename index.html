@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Casamento Isabella & Juan</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --marsala: #722F37;
+      --marsala-escuro: #4d1f27;
+      --off-white: #fffaf7;
+      --branco: #ffffff;
+      --texto: #3b2b2b;
+      --dourado: #c7a56b;
+      --sombra: 0 18px 45px rgba(54, 30, 34, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: var(--off-white);
+      color: var(--texto);
+      line-height: 1.7;
+    }
+
+    .oculto {
+      display: none !important;
+    }
+
+    .inicio {
+      width: 100%;
+      min-height: 100vh;
+      background-image: url();
+      background-size: cover;
+      background-position: center;
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      padding: 30px;
+    }
+
+    .inicio::after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      pointer-events: none;
+    }
+
+    .escurecer {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.50), rgba(0,0,0,0.28), rgba(0,0,0,0.62)),
+        radial-gradient(circle, rgba(114,47,55,0.25), rgba(0,0,0,0.15));
+    }
+
+    .conteudo-inicio {
+      position: relative;
+      z-index: 2;
+      color: white;
+      max-width: 850px;
+      animation: subir 1.2s ease both;
+    }
+
+    .texto-pequeno {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .marsala {
+      color: var(--marsala);
+    }
+
+    h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(70px, 14vw, 145px);
+      font-weight: 400;
+      line-height: 1;
+      margin: 12px 0;
+      text-shadow: 0 8px 28px rgba(0,0,0,0.45);
+    }
+
+    h1 span {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.45em;
+    }
+
+    .data {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(26px, 5vw, 40px);
+      letter-spacing: 6px;
+      margin-bottom: 18px;
+    }
+
+    .frase {
+      max-width: 680px;
+      margin: 0 auto 28px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(20px, 3vw, 28px);
+      line-height: 1.45;
+    }
+
+    button,
+    .botao-link {
+      font-family: inherit;
+      background: var(--marsala);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.25s ease;
+      box-shadow: 0 12px 25px rgba(77, 31, 39, 0.25);
+    }
+
+    button:hover,
+    .botao-link:hover {
+      background: var(--marsala-escuro);
+      transform: translateY(-2px);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .secao {
+      width: min(980px, calc(100% - 34px));
+      margin: 0 auto;
+      padding: 82px 0;
+      text-align: center;
+    }
+
+    .secao h2 {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--marsala);
+      font-size: clamp(40px, 8vw, 72px);
+      font-weight: 600;
+      line-height: 1.05;
+      margin: 10px 0 22px;
+    }
+
+    .secao p {
+      max-width: 830px;
+      margin: 0 auto;
+      font-size: 17px;
+    }
+
+    .versiculo {
+      width: 100%;
+      max-width: none;
+      background: var(--marsala);
+      color: white;
+      padding: 82px 26px;
+    }
+
+    .versiculo p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(30px, 6vw, 54px);
+      line-height: 1.2;
+    }
+
+    .versiculo span {
+      display: block;
+      margin-top: 18px;
+      color: #f4d7cd;
+      letter-spacing: 2px;
+    }
+
+    .contador {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      max-width: 740px;
+      margin: 34px auto 0;
+    }
+
+    .contador div {
+      background: white;
+      border: 1px solid rgba(114,47,55,0.13);
+      border-radius: 24px;
+      padding: 24px 10px;
+      box-shadow: var(--sombra);
+    }
+
+    .contador strong {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(36px, 8vw, 68px);
+      color: var(--marsala);
+      line-height: 1;
+    }
+
+    .contador span {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 13px;
+    }
+
+    .detalhes {
+  width: 100% !important;
+  max-width: none !important;
+  background:
+    linear-gradient(rgba(255, 250, 247, 0.42), rgba(255, 250, 247, 0.52)),
+    url("recanto-feiten.jpg") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  padding: 95px 18px !important;
+}
+
+    .divisor {
+  width: 80px;
+  height: 2px;
+  background: #722F37;
+  margin: 24px auto;
+  border-radius: 999px;
+}
+
+    .card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(2px);
+}
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      width: min(980px, 100%);
+      margin: 34px auto 0;
+    }
+
+    .card {
+      background: white;
+      border-radius: 26px;
+      padding: 26px 20px;
+      box-shadow: var(--sombra);
+      border: 1px solid rgba(114,47,55,0.12);
+    }
+
+    .card span {
+      display: block;
+      color: var(--dourado);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .card strong {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+      color: var(--marsala);
+      line-height: 1.2;
+    }
+
+    .botao-link {
+      margin-top: 28px;
+    }
+
+    .confirmar {
+      background: white;
+      border-radius: 34px;
+      box-shadow: var(--sombra);
+      padding-left: 28px;
+      padding-right: 28px;
+      margin-top: 74px;
+      margin-bottom: 74px;
+    }
+
+    .texto-confirmacao {
+      color: #6b5555;
+      margin-bottom: 28px !important;
+    }
+
+    .area-busca {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 28px auto 0;
+      max-width: 720px;
+    }
+
+    .area-busca input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid rgba(114,47,55,0.25);
+      border-radius: 50px;
+      padding: 14px 20px;
+      outline: none;
+      font-family: inherit;
+      font-size: 16px;
+    }
+
+    .area-busca input:focus {
+      border-color: var(--marsala);
+      box-shadow: 0 0 0 4px rgba(114,47,55,0.08);
+    }
+
+    #resultadoBusca {
+      max-width: 760px;
+      margin: 26px auto 0;
+      text-align: left;
+    }
+
+    .caixa-convite {
+      background: var(--off-white);
+      border: 1px solid rgba(114,47,55,0.14);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .caixa-convite h3 {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--marsala);
+      font-size: 34px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .lista-pessoas {
+      margin: 18px 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .lista-pessoas label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      padding: 12px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      border: 1px solid rgba(114,47,55,0.1);
+    }
+
+    .lista-pessoas input {
+      accent-color: var(--marsala);
+      width: 18px;
+      height: 18px;
+    }
+
+    .acoes {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .botao-negativo {
+      border: 1px solid rgba(114,47,55,0.25);
+      background: transparent;
+      color: var(--marsala);
+      box-shadow: none;
+    }
+
+    .mensagem {
+      background: var(--off-white);
+      border-radius: 20px;
+      padding: 20px;
+      border-left: 4px solid var(--marsala);
+    }
+
+    .final {
+      padding-top: 40px;
+    }
+
+    .assinatura {
+      font-family: "Great Vibes", cursive;
+      color: var(--marsala);
+      font-size: 44px !important;
+      margin-top: 18px !important;
+    }
+
+    .botao-musica {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 20;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      padding: 0;
+      font-size: 20px;
+    }
+
+    .revelar {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .revelar.ativo {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes subir {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .inicio {
+        min-height: 100svh;
+        padding: 24px;
+      }
+
+      .inicio::after {
+        inset: 11px;
+      }
+
+      .cards,
+      .contador {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .area-busca {
+        flex-direction: column;
+      }
+
+      .secao {
+        padding: 64px 0;
+      }
+
+      .confirmar {
+        width: min(100% - 24px, 980px);
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .acoes {
+        flex-direction: column;
+      }
+
+      .acoes button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .contador {
+        gap: 10px;
+      }
+
+      .contador div {
+        border-radius: 18px;
+        padding: 18px 6px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <audio id="musicaFundo" src="golden-hour.mp3" loop></audio>
+
+  <section class="inicio" id="inicio">
+    <div class="escurecer"></div>
+
+    <div class="conteudo-inicio">
+      <p class="texto-pequeno">O casamento de</p>
+
+      <h1>Isabella <span>&</span> Juan</h1>
+
+      <p class="data">09.01.2027</p>
+
+      <p class="frase">
+        Com imensa alegria, convidamos você para testemunhar a nossa união diante de Deus.
+      </p>
+
+      <button id="btnAbrirConvite">
+        Abrir convite
+      </button>
+    </div>
+  </section>
+
+  <main id="conteudoConvite" class="oculto">
+
+    <section class="secao revelar secao-floral">
+      <p class="texto-pequeno marsala">Nosso grande dia</p>
+
+      <h2>O nosso “sim” está chegando</h2>
+
+      <p>
+        Depois de tantos sonhos, planos e orações, chegou o momento de vivermos um dos dias mais especiais das nossas vidas.
+        Queremos celebrar esse amor ao lado de pessoas queridas, que fazem parte da nossa história e tornam esse momento ainda mais especial.
+        Será um dia preparado com muito amor, para celebrar não apenas o nosso casamento, mas o começo de uma nova história escrita pelas mãos do Senhor.
+      </p>
+    </section>
+
+    <section class="secao versiculo revelar">
+      <p>“Nós o amamos a ele porque ele nos amou primeiro.”</p>
+      <span>1 João 4:19</span>
+    </section>
+
+    <section class="secao revelar">
+      <p class="texto-pequeno marsala">Contagem regressiva</p>
+
+      <h2>Falta pouco para o nosso sim</h2>
+
+      <div class="contador">
+        <div>
+          <strong id="dias">00</strong>
+          <span>Dias</span>
+        </div>
+
+        <div>
+          <strong id="horas">00</strong>
+          <span>Horas</span>
+        </div>
+
+        <div>
+          <strong id="minutos">00</strong>
+          <span>Min</span>
+        </div>
+
+        <div>
+          <strong id="segundos">00</strong>
+          <span>Seg</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao detalhes revelar">
+      <p class="texto-pequeno marsala">Cerimônia e recepção</p>
+
+      <h2>Recanto Feiten</h2>
+
+      <div class="cards">
+        <div class="card">
+          <span>Data</span>
+          <strong>09 de janeiro de 2027</strong>
+        </div>
+
+        <div class="card">
+          <span>Horário</span>
+          <strong>16:30</strong>
+        </div>
+
+        <div class="card">
+          <span>Endereço</span>
+          <strong>Linha São Paulo - São Miguel, Toledo - PR, 85900-000</strong>
+        </div>
+      </div>
+
+      <a class="botao-link" href="https://maps.app.goo.gl/9ZtNAvtZLG43MzfC9" target="_blank">
+        Ver localização
+      </a>
+    </section>
+
+    <section class="secao confirmar revelar" id="confirmar">
+      <p class="texto-pequeno marsala">Confirmação de presença</p>
+
+      <h2>Confirme até 30/12/2026</h2>
+
+      <p class="texto-confirmacao">
+        Digite seu nome completo para encontrarmos seu convite.
+        Depois, selecione quem da família irá comparecer.
+      </p>
+
+      <div class="area-busca">
+        <input type="text" id="campoNome" placeholder="Digite seu nome completo">
+
+        <button id="btnBuscar">
+          Buscar convite
+        </button>
+      </div>
+
+      <div id="resultadoBusca"></div>
+    </section>
+
+    <section class="secao final revelar">
+      <h2>Esperamos você!</h2>
+
+      <p>
+        Sua presença tornará esse dia ainda mais especial para nós.
+      </p>
+
+      <p class="assinatura">Com carinho, Isabella & Juan</p>
+    </section>
+
+  </main>
+
+  <button id="btnMusica" class="botao-musica oculto">
+    ♪
+  </button>
+
+  <script>
+    const btnAbrirConvite = document.getElementById("btnAbrirConvite");
+    const conteudoConvite = document.getElementById("conteudoConvite");
+    const musica = document.getElementById("musicaFundo");
+    const btnMusica = document.getElementById("btnMusica");
+
+    const campoNome = document.getElementById("campoNome");
+    const btnBuscar = document.getElementById("btnBuscar");
+    const resultadoBusca = document.getElementById("resultadoBusca");
+
+    const dataCasamento = new Date("2027-01-09T16:30:00-03:00");
+    const dataLimiteConfirmacao = new Date("2026-12-30T23:59:59-03:00");
+
+    const convites = [
+      {
+        id: "familia-silva",
+        titulo: "Família Silva",
+        nomesBusca: ["Maria Silva", "João Silva", "Ana Silva"],
+        pessoas: ["Maria Silva", "João Silva", "Ana Silva"]
+      },
+      {
+        id: "ana-clara",
+        titulo: "Ana Clara",
+        nomesBusca: ["Ana Clara"],
+        pessoas: ["Ana Clara"]
+      },
+      {
+        id: "familia-santos",
+        titulo: "Família Santos",
+        nomesBusca: ["Carla Santos", "Pedro Santos"],
+        pessoas: ["Carla Santos", "Pedro Santos"]
+      }
+    ];
+
+    btnAbrirConvite.addEventListener("click", async () => {
+      conteudoConvite.classList.remove("oculto");
+      btnMusica.classList.remove("oculto");
+
+      try {
+        await musica.play();
+        btnMusica.textContent = "❚❚";
+      } catch (erro) {
+        console.log("A música só toca depois do clique.");
+        btnMusica.textContent = "♪";
+      }
+
+      conteudoConvite.scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+
+    btnMusica.addEventListener("click", async () => {
+      if (musica.paused) {
+        await musica.play();
+        btnMusica.textContent = "❚❚";
+      } else {
+        musica.pause();
+        btnMusica.textContent = "♪";
+      }
+    });
+
+    function atualizarContador() {
+      const agora = new Date();
+      const diferenca = dataCasamento - agora;
+
+      if (diferenca <= 0) {
+        document.querySelector(".contador").innerHTML = "<p>Chegou o nosso grande dia!</p>";
+        return;
+      }
+
+      const segundosTotais = Math.floor(diferenca / 1000);
+
+      const dias = Math.floor(segundosTotais / (60 * 60 * 24));
+      const horas = Math.floor((segundosTotais / (60 * 60)) % 24);
+      const minutos = Math.floor((segundosTotais / 60) % 60);
+      const segundos = segundosTotais % 60;
+
+      document.getElementById("dias").textContent = String(dias).padStart(2, "0");
+      document.getElementById("horas").textContent = String(horas).padStart(2, "0");
+      document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
+      document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
+    }
+
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add("ativo");
+        }
+      });
+    }, {
+      threshold: 0.18
+    });
+
+    document.querySelectorAll(".revelar").forEach((elemento) => {
+      observador.observe(elemento);
+    });
+
+    function normalizarTexto(texto) {
+      return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, "")
+        .trim();
+    }
+
+    function mostrarMensagem(texto) {
+      resultadoBusca.innerHTML = `
+        <div class="mensagem">
+          ${texto}
+        </div>
+      `;
+    }
+
+    function buscarConvite() {
+      const nomeDigitado = campoNome.value.trim();
+
+      if (!nomeDigitado) {
+        mostrarMensagem("Digite seu nome completo para buscarmos seu convite.");
+        return;
+      }
+
+      if (new Date() > dataLimiteConfirmacao) {
+        mostrarMensagem("O prazo para confirmação de presença encerrou em 30/12/2026. Caso precise alterar alguma informação, entre em contato com a noiva.");
+        return;
+      }
+
+      const nomeNormalizado = normalizarTexto(nomeDigitado);
+
+      const convite = convites.find((item) => {
+        return item.nomesBusca.some((nome) => {
+          const nomeDaLista = normalizarTexto(nome);
+          return nomeDaLista.includes(nomeNormalizado) || nomeNormalizado.includes(nomeDaLista);
+        });
+      });
+
+      if (!convite) {
+        mostrarMensagem("Nome não encontrado. Verifique se digitou corretamente ou entre em contato com a noiva.");
+        return;
+      }
+
+      const respostaSalva = localStorage.getItem(`resposta-${convite.id}`);
+
+      if (respostaSalva) {
+        mostrarMensagem("Sua resposta já foi registrada. Caso precise alterar alguma informação, entre em contato com a noiva.");
+        return;
+      }
+
+      mostrarConvite(convite);
+    }
+
+    function mostrarConvite(convite) {
+      const pessoasHTML = convite.pessoas.map((pessoa, index) => {
+        return `
+          <label>
+            <input type="checkbox" value="${pessoa}" id="pessoa-${index}">
+            ${pessoa}
+          </label>
+        `;
+      }).join("");
+
+      resultadoBusca.innerHTML = `
+        <div class="caixa-convite">
+          <h3>${convite.titulo}</h3>
+
+          <p>Encontramos seu convite! Selecione quem irá comparecer:</p>
+
+          <div class="lista-pessoas">
+            ${pessoasHTML}
+          </div>
+
+          <div class="acoes">
+            <button onclick="confirmarPresenca('${convite.id}')">
+              Confirmar presença
+            </button>
+
+            <button class="botao-negativo" onclick="naoPodereiIr('${convite.id}')">
+              Não poderei ir
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function confirmarPresenca(idConvite) {
+      const selecionados = Array.from(document.querySelectorAll(".lista-pessoas input:checked"))
+        .map((input) => input.value);
+
+      if (selecionados.length === 0) {
+        mostrarMensagem("Selecione pelo menos uma pessoa para confirmar a presença.");
+        return;
+      }
+
+      const resposta = {
+        status: "confirmado",
+        pessoas: selecionados,
+        quantidade: selecionados.length,
+        data: new Date().toISOString()
+      };
+
+      localStorage.setItem(`resposta-${idConvite}`, JSON.stringify(resposta));
+
+      mostrarMensagem(`
+        Presença confirmada com sucesso! Estamos muito felizes em compartilhar esse dia com vocês 🤍
+        <br><br>
+        <strong>Pessoas confirmadas:</strong> ${selecionados.join(", ")}
+        <br>
+        <strong>Total confirmado:</strong> ${selecionados.length}
+        <br><br>
+        Caso precise alterar alguma informação, entre em contato com a noiva.
+      `);
+    }
+
+    function naoPodereiIr(idConvite) {
+      const resposta = {
+        status: "nao_ira",
+        pessoas: [],
+        quantidade: 0,
+        data: new Date().toISOString()
+      };
+
+      localStorage.setItem(`resposta-${idConvite}`, JSON.stringify(resposta));
+
+      mostrarMensagem("Sentiremos sua falta nesse dia tão especial, mas agradecemos de coração pelo carinho e por fazer parte da nossa história 🤍");
+    }
+
+    btnBuscar.addEventListener("click", buscarConvite);
+
+    campoNome.addEventListener("keydown", (evento) => {
+      if (evento.key === "Enter") {
+        buscarConvite();
+      }
+    });
+  </script>
+</body>
+</html>
